@@ -1,0 +1,62 @@
+for a = 1 to 10: worksheets(a).Name = ""&a:next a
+_______________________________________________________
+
+Sub CriarPlanilha()
+Sheets.Add After:=Sheets(Sheets.Count)
+ActiveSheet.Name = "Cadastro de Clientes"
+End Sub
+_______________________________________________________
+
+Sub Renomeia()
+    Dim Planilha As Worksheet
+    i = 1
+    For Each Planilha In ActiveWorkbook.Worksheets
+        Planilha.Name = FormatNumber(i, 0, vbTrue)
+        i = i + 1
+    Next
+End Sub
+______________________________________________________
+
+Sub Nomeando_planilha_ativa()
+On Error Resume Next
+If Range("D10").Value = "" Then
+ActiveSheet.Name = "Nova Planilha Saberexcel"
+MsgBox "Nome [" & ActiveSheet.Name & " ] porque a célula D10 está vazia", _
+vbInformation, "Saberexcel - o site das macros"
+Exit Sub
+Else
+ActiveSheet.Name = Range("D10").Value
+MsgBox "Planilha nomeada como [ " & Range("D10") & " ] valor da célula[D10]", _
+vbInformation, "Saberexcel - o site das macros"
+End If
+End Sub
+______________________________________________________
+
+
+Sub Nomeando_planilha_ativa()
+On Error Resume Next
+Dim Planilha As Worksheet
+Dim Qtde As Integer
+Dim Num As Integer
+
+Qtde = 2
+Num = 1
+
+For Each Planilha In ActiveWorkbook.Worksheets
+
+If Range("B2").Value = "" Then
+ActiveSheet.Name = "Sem conteudo"
+MsgBox "[ " & ActiveSheet.Name & " ] porque a célula [ " & "B" & Qtde & " ] está vazia!", _
+vbInformation, "Erro no nome das planilhas"
+Exit Sub
+Else
+Planilha.Name = Range("B" & Qtde).Value
+'ActiveSheet.Name = Range("B2").Value
+MsgBox "Planilha nomeada como [ " & Range("B" & Qtde) & " ] Numero da aba [ " & FormatNumber(Num, 0, vbTrue) & " ] ", _
+vbInformation, "Alterado com sucesso!"
+Qtde = Qtde + 1
+Num = Num + 1
+End If
+Next
+
+End Sub
